@@ -36,8 +36,17 @@ usersRouter.post('/', async (req, res, next) => {
 });
 
 // Update a user
-usersRouter.put('/:userID', (_req, _res, next) => {
-  next();
+usersRouter.patch('/:userID', async (req, res, next) => {
+  try {
+    await User.update(req.body, {
+      where: { id: req.params.userID },
+      returning: true
+    });
+    const user = await User.findByPk(req.params.userID);
+    res.json(user);
+  } catch(err) {
+    next(err);
+  }
 });
 
 // Delete a user
