@@ -2,7 +2,7 @@ import express from 'express';
 import { middlewareLogger } from './middleware/logger';
 import { usersRouter } from './routes/users';
 import { sequelize } from './database';
-import { User } from './models/User';
+//import { User } from './models/User';
 
 //async always returns a promise
 const run = async() => {
@@ -24,20 +24,20 @@ const run = async() => {
     console.log(err);
   }
 
-  const person = new User({
-    firstName: 'Rajat',
-    lastName: 'Bansal',
-    email: 'thisisfake123@gfake.com',
-    password: 'thisisatest'
-  });
+  // const person = new User({
+  //   firstName: 'Rajat',
+  //   lastName: 'Bansal',
+  //   email: 'thisisfake123@gfake.com',
+  //   password: 'thisisatest'
+  // });
 
-  await person.save();
+  // await person.save();
 
   //use middleware logger for all requests
   app.use(middlewareLogger);
 
   //defining a new pipe
-  app.get('/users', usersRouter);
+  app.use('/users', usersRouter);
 
   app.listen(9999);
   console.log('API running on localhost:9999');
