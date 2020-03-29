@@ -35,7 +35,8 @@ const run = async() => {
 
   //use middleware logger for all requests
   app.use(middlewareLogger);
-
+  app.use(express.json());
+  
   //defining a new pipe
   app.use('/users', usersRouter);
 
