@@ -1,6 +1,9 @@
 import { Table, Column, Model, DataType, AllowNull, Unique } from 'sequelize-typescript';
 
-@Table
+@Table({
+  paranoid: true // will ensure that data doesnt 'actually' get deleted. Will create a deletedAt column
+  // if data gets deleted deleteAt column will show deleted date otherwise its null
+})
 export class User extends Model<User> {
 
   @Column({

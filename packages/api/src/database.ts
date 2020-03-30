@@ -8,5 +8,5 @@ export const sequelize = new Sequelize({
   password: '',
   storage: 'chat.db', //db filename for sqlite
   models: [`${__dirname}/models`],
-  logging: false //to avoid seeing Db messages
+  logging: false //to avoid seeing Db messages,
 });
