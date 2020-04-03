@@ -1,4 +1,6 @@
-import { Table, Column, Model, DataType, AllowNull, Unique } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, AllowNull, Unique, BelongsToMany } from 'sequelize-typescript';
+import { Conversation } from './Conversation';
+import { UserConversation } from './UserConversation';
 
 @Table({
   paranoid: true // will ensure that data doesnt 'actually' get deleted. Will create a deletedAt column
@@ -29,4 +31,10 @@ export class User extends Model<User> {
   @AllowNull(false)
   @Column
   password: string;
+
+  /**
+   * this will create a joined table between foreign keys of Conversation & UserConversation we specified
+   */
+  @BelongsToMany(() => Conversation, () => UserConversation)
+  conversations: Conversation[];
 }

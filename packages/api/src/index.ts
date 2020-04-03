@@ -2,6 +2,8 @@ import express from 'express';
 import { middlewareLogger } from './middleware/logger';
 import { usersRouter } from './routes/users';
 import { sequelize } from './database';
+import { conversationsRouter } from './routes/conversations';
+import { messagesRouter } from './routes/messages';
 //import { User } from './models/User';
 
 //async always returns a promise
@@ -39,6 +41,8 @@ const run = async() => {
   
   //defining a new pipe
   app.use('/users', usersRouter);
+  app.use('/conversations', conversationsRouter);
+  app.use('/messages', messagesRouter);
 
   app.listen(9999);
   console.log('API running on localhost:9999');
