@@ -4,7 +4,7 @@ import { usersRouter } from './routes/users';
 import { sequelize } from './database';
 import { conversationsRouter } from './routes/conversations';
 import { messagesRouter } from './routes/messages';
-//import { User } from './models/User';
+import cors from 'cors';
 
 //async always returns a promise
 const run = async() => {
@@ -12,13 +12,14 @@ const run = async() => {
 
 
   /*each middleware takes 3 params
-  1. req 
+  1. req
   2. res
   3. next - moves to next middleware in the pipeline
   */
 
   try {
-  // await works only inside async functions. Await makes promise wait and returns the result once promise has been resolved
+  // await works only inside async functions.
+  // Await makes promise wait and returns the result once promise has been resolved
     await sequelize.authenticate();
     await sequelize.sync(); // sync changes to DB right from the model
   } catch(err) {
@@ -26,20 +27,11 @@ const run = async() => {
     console.log(err);
   }
 
-  // const person = new User({
-  //   firstName: 'Rajat',
-  //   lastName: 'Bansal',
-  //   email: 'thisisfake123@gfake.com',
-  //   password: 'thisisatest'
-  // });
-
-  // await person.save();
-
-  //use middleware logger for all requests
+  app.use(cors());
+  // use middleware logger for all requests
   app.use(middlewareLogger);
   app.use(express.json());
-  
-  //defining a new pipe
+  // defining a new pipe
   app.use('/users', usersRouter);
   app.use('/conversations', conversationsRouter);
   app.use('/messages', messagesRouter);
